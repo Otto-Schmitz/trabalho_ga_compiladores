@@ -9,7 +9,7 @@ import java.io.IOException;
 %}
 
 %class JavaLexer
-%type int, float
+%type Object
 %unicode
 %line
 %column
@@ -18,8 +18,10 @@ import java.io.IOException;
 BRANCO     = [ \t\n\r]+
 ID         = [a-zA-Z][a-zA-Z0-9_]*
 NUMERO     = 0|[1-9][0-9]*
+DECIMAL    = [0-9]+\.[0-9]+
+STRING     = \"([^\"\\]|\\.)*\"
 OPERADOR   = "=="|"="|"+"|"-"|"*"|"/"|"<"|">"|"%"|"!"|"&"
-DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","
+DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","|"'"|"["|"]"
 
 %%
 
@@ -28,6 +30,7 @@ DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","
 "public"  { imprimir("PALAVRA_RESERVADA", yytext()); }
 "int"     { imprimir("PALAVRA_RESERVADA", yytext()); }
 "float"   { imprimir("PALAVRA_RESERVADA", yytext()); }
+"String"  { imprimir("PALAVRA_RESERVADA", yytext()); }
 "void"    { imprimir("PALAVRA_RESERVADA", yytext()); }
 "if"      { imprimir("PALAVRA_RESERVADA", yytext()); }
 "else"    { imprimir("PALAVRA_RESERVADA", yytext()); }
@@ -35,7 +38,9 @@ DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","
 
 // Identificadores e Números
 {ID}         { imprimir("IDENTIFICADOR", yytext()); }
-{NUMERO}     { imprimir("NUMERO", yytext()); }
+{NUMERO}     { imprimir("NUMERO_INT", yytext()); }
+{DECIMAL}    { imprimir("NUMERO_FLOAT", yytext()); }
+{STRING}     { imprimir("STRING", yytext()); }
 
 // Operadores
 {OPERADOR}   { imprimir("OPERADOR", yytext()); }

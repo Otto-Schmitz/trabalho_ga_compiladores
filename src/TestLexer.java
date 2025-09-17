@@ -14,8 +14,11 @@ public class TestLexer {
 
     x &= 1;
 
-    System.out.println(x);
 
-    // float y = 1.0f;
+    String s = "Hello, World!";
+    String nome = "João";
+    float y = 1.0f;
+    double z = 3.14159;
+    int idade = 25;
   }
 }
