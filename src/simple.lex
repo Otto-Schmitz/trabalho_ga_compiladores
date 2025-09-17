@@ -20,8 +20,9 @@ ID         = [a-zA-Z][a-zA-Z0-9_]*
 NUMERO     = 0|[1-9][0-9]*
 DECIMAL    = [0-9]+\.[0-9]+
 STRING     = \"([^\"\\]|\\.)*\"
-OPERADOR   = "=="|"="|"+"|"-"|"*"|"/"|"<"|">"|"%"|"!"|"&"
-DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","|"'"|"["|"]"
+CHAR       = \'([^\"\\]|\\.)\\
+OPERADOR   = "==" | "=" | "+" | "-" | "*" | "/" | "<" | ">" | "%" | "!" | "&"
+DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "'" | "[" | "]"
 
 %%
 
@@ -31,6 +32,7 @@ DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","|"'"|"["|"]"
 "int"     { imprimir("PALAVRA_RESERVADA", yytext()); }
 "float"   { imprimir("PALAVRA_RESERVADA", yytext()); }
 "String"  { imprimir("PALAVRA_RESERVADA", yytext()); }
+"char"    { imprimir("PALAVRA_RESERVADA", yytext()); }
 "void"    { imprimir("PALAVRA_RESERVADA", yytext()); }
 "if"      { imprimir("PALAVRA_RESERVADA", yytext()); }
 "else"    { imprimir("PALAVRA_RESERVADA", yytext()); }
@@ -41,6 +43,7 @@ DELIMITADOR = "{"|"}"|"("|")"|";"|"."|","|"'"|"["|"]"
 {NUMERO}     { imprimir("NUMERO_INT", yytext()); }
 {DECIMAL}    { imprimir("NUMERO_FLOAT", yytext()); }
 {STRING}     { imprimir("STRING", yytext()); }
+{CHAR}       { imprimir("CHAR", yytext()); }
 
 // Operadores
 {OPERADOR}   { imprimir("OPERADOR", yytext()); }

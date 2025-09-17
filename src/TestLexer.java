@@ -20,5 +20,6 @@ public class TestLexer {
     float y = 1.0f;
     double z = 3.14159;
     int idade = 25;
+    char a = 'a';
   }
 }
