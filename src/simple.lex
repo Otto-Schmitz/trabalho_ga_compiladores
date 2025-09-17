@@ -20,9 +20,9 @@ ID         = [a-zA-Z][a-zA-Z0-9_]*
 NUMERO     = 0|[1-9][0-9]*
 DECIMAL    = [0-9]+\.[0-9]+
 STRING     = \"([^\"\\]|\\.)*\"
-CHAR       = \'([^\"\\]|\\.)\\
+CHAR       = \'([^\"\\]|\\.)\'
 OPERADOR   = "==" | "=" | "+" | "-" | "*" | "/" | "<" | ">" | "%" | "!" | "&"
-DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "'" | "[" | "]"
+DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "[" | "]"
 
 %%
 
@@ -37,6 +37,9 @@ DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "'" | "[" | "]"
 "if"      { imprimir("PALAVRA_RESERVADA", yytext()); }
 "else"    { imprimir("PALAVRA_RESERVADA", yytext()); }
 "while"   { imprimir("PALAVRA_RESERVADA", yytext()); }
+"for"     { imprimir("PALAVRA_RESERVADA", yytext()); }
+"true"    { imprimir("PALAVRA_RESERVADA", yytext()); }
+"false"   { imprimir("PALAVRA_RESERVADA", yytext()); }
 
 // Identificadores e Números
 {ID}         { imprimir("IDENTIFICADOR", yytext()); }
