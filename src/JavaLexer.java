@@ -15,6 +15,7 @@ class JavaLexer {
 
   // Lexical states.
   public static final int YYINITIAL = 0;
+  public static final int STR = 2;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -23,7 +24,7 @@ class JavaLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0, 0
+     0,  0,  1, 1
   };
 
   /**
@@ -60,14 +61,14 @@ class JavaLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\2\1\2\2\1\1\22\0\1\1\1\3\1\4"+
-    "\5\0\2\5\2\6\1\5\1\6\1\0\1\6\12\7"+
-    "\1\0\1\5\1\10\1\11\1\10\2\0\22\12\1\13"+
-    "\7\12\4\0\1\12\1\0\1\14\3\12\1\15\1\16"+
-    "\1\17\1\20\1\21\2\12\1\22\1\12\1\23\1\24"+
-    "\2\12\1\25\1\26\1\27\1\30\1\12\1\31\3\12"+
-    "\1\5\1\0\1\5\7\0\1\2\u01a2\0\2\2\326\0"+
-    "\u0100\2";
+    "\11\0\1\1\1\2\2\3\1\2\22\0\1\1\1\4"+
+    "\1\5\5\0\2\6\2\7\1\6\1\7\1\0\1\7"+
+    "\12\10\1\0\1\6\1\11\1\12\1\11\2\0\22\13"+
+    "\1\14\7\13\1\0\1\15\2\0\1\13\1\0\1\16"+
+    "\3\13\1\17\1\20\1\21\1\22\1\23\2\13\1\24"+
+    "\1\13\1\25\1\26\2\13\1\27\1\30\1\31\1\32"+
+    "\1\13\1\33\3\13\1\6\1\0\1\6\7\0\1\3"+
+    "\u01a2\0\2\3\326\0\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -94,12 +95,12 @@ class JavaLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\2\1\1\3\1\4\1\5\1\6"+
-    "\1\7\7\10\1\0\1\11\4\10\1\12\6\10\1\13"+
-    "\6\10";
+    "\2\0\1\1\1\2\1\1\1\3\1\4\1\5\1\6"+
+    "\1\7\1\10\7\11\1\12\1\13\1\14\4\11\1\15"+
+    "\3\11\1\16\1\17\1\20\1\21\3\11\1\22\6\11";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[37];
+    int [] result = new int[43];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -124,14 +125,15 @@ class JavaLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\32\0\64\0\116\0\150\0\32\0\32\0\202"+
-    "\0\32\0\116\0\234\0\266\0\320\0\352\0\u0104\0\u011e"+
-    "\0\u0138\0\150\0\32\0\u0152\0\u016c\0\u0186\0\u01a0\0\234"+
-    "\0\u01ba\0\u01d4\0\u01ee\0\u0208\0\u0222\0\u023c\0\234\0\u0256"+
-    "\0\u0270\0\u028a\0\u02a4\0\u02be\0\u02d8";
+    "\0\0\0\34\0\70\0\124\0\160\0\70\0\70\0\70"+
+    "\0\214\0\70\0\160\0\250\0\304\0\340\0\374\0\u0118"+
+    "\0\u0134\0\u0150\0\u016c\0\70\0\u0188\0\u01a4\0\u01c0\0\u01dc"+
+    "\0\u01f8\0\250\0\u0214\0\u0230\0\u024c\0\70\0\70\0\70"+
+    "\0\70\0\u0268\0\u0284\0\u02a0\0\250\0\u02bc\0\u02d8\0\u02f4"+
+    "\0\u0310\0\u032c\0\u0348";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[37];
+    int [] result = new int[43];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -154,31 +156,39 @@ class JavaLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\0\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\1\14\1\13\1\15\1\16\2\13"+
-    "\1\17\3\13\1\20\3\13\1\21\33\0\1\3\41\0"+
-    "\1\11\20\0\4\22\1\23\25\22\7\0\1\10\31\0"+
-    "\1\13\2\0\20\13\7\0\1\13\2\0\15\13\1\24"+
-    "\2\13\7\0\1\13\2\0\10\13\1\25\7\13\7\0"+
-    "\1\13\2\0\10\13\1\26\1\13\1\27\5\13\7\0"+
-    "\1\13\2\0\4\13\1\30\4\13\1\31\6\13\7\0"+
-    "\1\13\2\0\3\13\1\32\14\13\7\0\1\13\2\0"+
-    "\6\13\1\33\11\13\7\0\1\13\2\0\13\13\1\34"+
-    "\4\13\7\0\1\13\2\0\14\13\1\35\3\13\7\0"+
-    "\1\13\2\0\12\13\1\36\5\13\7\0\1\13\2\0"+
-    "\13\13\1\30\4\13\7\0\1\13\2\0\15\13\1\37"+
-    "\2\13\7\0\1\13\2\0\15\13\1\40\2\13\7\0"+
-    "\1\13\2\0\7\13\1\41\10\13\7\0\1\13\2\0"+
-    "\7\13\1\42\10\13\7\0\1\13\2\0\3\13\1\30"+
-    "\14\13\7\0\1\13\2\0\2\13\1\31\15\13\7\0"+
-    "\1\13\2\0\16\13\1\43\1\13\7\0\1\13\2\0"+
-    "\10\13\1\35\7\13\7\0\1\13\2\0\11\13\1\44"+
-    "\6\13\7\0\1\13\2\0\13\13\1\45\4\13\7\0"+
-    "\1\13\2\0\5\13\1\37\12\13\7\0\1\13\2\0"+
-    "\11\13\1\30\6\13";
+    "\1\3\2\4\1\0\1\5\1\6\1\7\1\10\1\11"+
+    "\1\12\1\13\1\14\1\15\1\3\1\14\1\16\1\17"+
+    "\2\14\1\20\3\14\1\21\3\14\1\22\2\23\1\0"+
+    "\2\23\1\24\7\23\1\25\16\23\35\0\2\4\43\0"+
+    "\1\12\31\0\1\11\33\0\1\14\2\0\2\14\1\0"+
+    "\16\14\10\0\1\14\2\0\2\14\1\0\13\14\1\26"+
+    "\2\14\10\0\1\14\2\0\2\14\1\0\6\14\1\27"+
+    "\7\14\10\0\1\14\2\0\2\14\1\0\6\14\1\30"+
+    "\1\14\1\31\5\14\10\0\1\14\2\0\2\14\1\0"+
+    "\2\14\1\32\4\14\1\33\6\14\10\0\1\14\2\0"+
+    "\2\14\1\0\1\14\1\34\14\14\10\0\1\14\2\0"+
+    "\2\14\1\0\4\14\1\35\11\14\2\23\1\0\2\23"+
+    "\1\0\7\23\1\0\16\23\5\0\1\36\17\0\1\37"+
+    "\1\0\1\40\1\0\1\41\12\0\1\14\2\0\2\14"+
+    "\1\0\11\14\1\42\4\14\10\0\1\14\2\0\2\14"+
+    "\1\0\12\14\1\43\3\14\10\0\1\14\2\0\2\14"+
+    "\1\0\10\14\1\44\5\14\10\0\1\14\2\0\2\14"+
+    "\1\0\11\14\1\32\4\14\10\0\1\14\2\0\2\14"+
+    "\1\0\13\14\1\45\2\14\10\0\1\14\2\0\2\14"+
+    "\1\0\13\14\1\46\2\14\10\0\1\14\2\0\2\14"+
+    "\1\0\5\14\1\47\10\14\10\0\1\14\2\0\2\14"+
+    "\1\0\5\14\1\50\10\14\10\0\1\14\2\0\2\14"+
+    "\1\0\1\14\1\32\14\14\10\0\1\14\2\0\2\14"+
+    "\1\0\1\33\15\14\10\0\1\14\2\0\2\14\1\0"+
+    "\14\14\1\51\1\14\10\0\1\14\2\0\2\14\1\0"+
+    "\6\14\1\43\7\14\10\0\1\14\2\0\2\14\1\0"+
+    "\7\14\1\52\6\14\10\0\1\14\2\0\2\14\1\0"+
+    "\11\14\1\53\4\14\10\0\1\14\2\0\2\14\1\0"+
+    "\3\14\1\45\12\14\10\0\1\14\2\0\2\14\1\0"+
+    "\7\14\1\32\6\14";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[754];
+    int [] result = new int[868];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -221,11 +231,11 @@ class JavaLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\3\1\2\11\1\1\1\11\10\1\1\0"+
-    "\1\11\22\1";
+    "\2\0\1\11\2\1\3\11\1\1\1\11\11\1\1\11"+
+    "\11\1\4\11\12\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[37];
+    int [] result = new int[43];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -303,6 +313,8 @@ class JavaLexer {
   private boolean zzEOFDone;
 
   /* user code: */
+    StringBuffer string = new StringBuffer();
+
     private Token createToken(String tipo, String valor) {
         return new Token(tipo, valor, yyline + 1, yycolumn + 1);
     }
@@ -706,57 +718,92 @@ class JavaLexer {
             { return createToken("ERROR", yytext());
             }
             // fall through
-          case 12: break;
+          case 19: break;
           case 2:
             { /* ignorar */
             }
             // fall through
-          case 13: break;
-          case 3:
-            { return createToken("DELIMITER", yytext());
-            }
-            // fall through
-          case 14: break;
-          case 4:
-            { return createToken("OPERATOR", yytext());
-            }
-            // fall through
-          case 15: break;
-          case 5:
-            { return createToken("NUMBER", yytext());
-            }
-            // fall through
-          case 16: break;
-          case 6:
-            { return createToken("COMPARISON", yytext());
-            }
-            // fall through
-          case 17: break;
-          case 7:
-            { return createToken("ASSIGNMENT", yytext());
-            }
-            // fall through
-          case 18: break;
-          case 8:
-            { return createToken("IDENTIFIER", yytext());
-            }
-            // fall through
-          case 19: break;
-          case 9:
-            { return createToken("STRING", yytext());
-            }
-            // fall through
           case 20: break;
-          case 10:
-            { return createToken("KEYWORD", yytext());
+          case 3:
+            { string.setLength(0); yybegin(STR);
             }
             // fall through
           case 21: break;
-          case 11:
-            { return createToken("TYPE", yytext());
+          case 4:
+            { return createToken("DELIMITER", yytext());
             }
             // fall through
           case 22: break;
+          case 5:
+            { return createToken("OPERATOR", yytext());
+            }
+            // fall through
+          case 23: break;
+          case 6:
+            { return createToken("NUMBER", yytext());
+            }
+            // fall through
+          case 24: break;
+          case 7:
+            { return createToken("COMPARISON", yytext());
+            }
+            // fall through
+          case 25: break;
+          case 8:
+            { return createToken("ASSIGNMENT", yytext());
+            }
+            // fall through
+          case 26: break;
+          case 9:
+            { return createToken("IDENTIFIER", yytext());
+            }
+            // fall through
+          case 27: break;
+          case 10:
+            { string.append( yytext() );
+            }
+            // fall through
+          case 28: break;
+          case 11:
+            { yybegin(YYINITIAL); return createToken("STRING", string.toString());
+            }
+            // fall through
+          case 29: break;
+          case 12:
+            { string.append('\\');
+            }
+            // fall through
+          case 30: break;
+          case 13:
+            { return createToken("KEYWORD", yytext());
+            }
+            // fall through
+          case 31: break;
+          case 14:
+            { string.append('\"');
+            }
+            // fall through
+          case 32: break;
+          case 15:
+            { string.append('\n');
+            }
+            // fall through
+          case 33: break;
+          case 16:
+            { string.append('\r');
+            }
+            // fall through
+          case 34: break;
+          case 17:
+            { string.append('\t');
+            }
+            // fall through
+          case 35: break;
+          case 18:
+            { return createToken("TYPE", yytext());
+            }
+            // fall through
+          case 36: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

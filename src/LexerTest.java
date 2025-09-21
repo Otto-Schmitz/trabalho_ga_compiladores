@@ -3,17 +3,19 @@ import java.io.*;
 public class LexerTest {
     public static void main(String[] args) {
         try {
-            String input = "int x = 10;\nif (x > 5) {\n    x = x + 1;\n}";
-            JavaLexer lexer = new JavaLexer(new StringReader(input));
+            FileReader input;
+            input = new FileReader("src/TestLexer.java"); // caminho fixo
+            JavaLexer lexer = new JavaLexer(input);
             
-            System.out.println("Análise léxica do código:");
-            System.out.println(input);
-            System.out.println("\nTokens encontrados:");
+
+            System.out.println("Análise léxica do código!");
+
             
             Token token;
             while ((token = lexer.yylex()) != null) {
                 System.out.println(token);
             }
+            input.close();
             
         } catch (Exception e) {
             e.printStackTrace();
