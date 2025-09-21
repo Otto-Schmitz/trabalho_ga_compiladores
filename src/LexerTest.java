@@ -1,22 +1,22 @@
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.StringReader;
+import java.io.*;
 
 public class LexerTest {
-    public static void main(String[] args) throws Exception {
-
-        // Lê o conteúdo de TestLexer.java
-        BufferedReader reader = new BufferedReader(new FileReader("src/TestLexer.java"));
-        StringBuilder builder = new StringBuilder();
-        String line;
-
-        while ((line = reader.readLine()) != null) { // le ate o EOF
-            builder.append(line).append("\n"); // adiciona todas as linha no builder
+    public static void main(String[] args) {
+        try {
+            String input = "int x = 10;\nif (x > 5) {\n    x = x + 1;\n}";
+            JavaLexer lexer = new JavaLexer(new StringReader(input));
+            
+            System.out.println("Análise léxica do código:");
+            System.out.println(input);
+            System.out.println("\nTokens encontrados:");
+            
+            Token token;
+            while ((token = lexer.yylex()) != null) {
+                System.out.println(token);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        reader.close();
-
-        // Cria o analisador léxico e executa
-        JavaLexer lexer = new JavaLexer(new StringReader(builder.toString()));
-        lexer.yylex();
     }
 }
