@@ -14,6 +14,7 @@ import java.io.IOException;
 %line
 %column
 %standalone
+%state STR
 
 BRANCO     = [ \t\n\r]+
 ID         = [a-zA-Z][a-zA-Z0-9_]*
@@ -62,3 +63,17 @@ DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "[" | "]"
 
 // Caractere inválido
 .            { throw new RuntimeException("Caractere inválido: " + yytext()); }
+
+// Tratamento de strings
+\"              { yybegin(STR); }
+
+<STR>[^\"\n\\]+ {}
+<STR>\\\"       {}
+<STR>           {}
+
+<STR> \" {
+  yybegin(YYINITIAL);
+  imprimir("STRING", yytext());
+}
+
+<STR> \n {  throw new RuntimeException("Erro léxico: String não fechada na linha " + yyline); }
