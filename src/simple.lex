@@ -37,6 +37,9 @@ DELIMITADOR = "{" | "}" | "(" | ")" | ";" | "." | "," | "[" | "]"
 "if"      { imprimir("PALAVRA_RESERVADA", yytext()); }
 "else"    { imprimir("PALAVRA_RESERVADA", yytext()); }
 "while"   { imprimir("PALAVRA_RESERVADA", yytext()); }
+"for"     { imprimir("PALAVRA_RESERVADA", yytext()); }
+"true"    { imprimir("PALAVRA_RESERVADA", yytext()); }
+"false"   { imprimir("PALAVRA_RESERVADA", yytext()); }
 
 // Identificadores e Números
 {ID}         { imprimir("IDENTIFICADOR", yytext()); }
