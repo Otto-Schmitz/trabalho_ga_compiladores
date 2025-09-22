@@ -810,7 +810,7 @@ class JavaLexer {
             // fall through
           case 36: break;
           case 18:
-            { return createToken("CHAR", yytext().substring(1, yytext().length()));
+            { return createToken("CHAR", yytext().substring(1, yytext().length()-1));
             }
             // fall through
           case 37: break;
