@@ -5,6 +5,7 @@
 %line
 %column
 %state STR
+%state CHAR
 
 %{
     StringBuffer string = new StringBuffer();
@@ -16,7 +17,7 @@
 
 // Definições de padrões
 IDENTIFIER = [a-zA-Z_][a-zA-Z0-9_]*
-NUMBER = [0-9]+|[0-9]+.[0-9]+
+NUMBER = [0-9]+
 WHITESPACE = [ \t\r\n]+
 
 
@@ -42,33 +43,8 @@ WHITESPACE = [ \t\r\n]+
     "="             { return createToken("ASSIGNMENT", yytext()); }
     "=="            { return createToken("COMPARISON", yytext()); }
     "!="            { return createToken("COMPARISON", yytext()); }
-    "!"             { return createToken("COMPARISON", yytext()); }
-    "%"             { return createToken("COMPARISON", yytext()); }
     "<"             { return createToken("COMPARISON", yytext()); }
     ">"             { return createToken("COMPARISON", yytext()); }
-    "%"             { return createToken("OPERATOR", yytext()); }
-    "&"             { return createToken("OPERATOR", yytext()); }
-    "|"             { return createToken("OPERATOR", yytext()); }
-    "^"             { return createToken("OPERATOR", yytext()); }
-    "~"             { return createToken("OPERATOR", yytext()); }
-    "<<"            { return createToken("OPERATOR", yytext()); }
-    ">>"            { return createToken("OPERATOR", yytext()); }
-    "++"            { return createToken("OPERATOR", yytext()); }
-    "--"            { return createToken("OPERATOR", yytext()); }
-    "+="            { return createToken("OPERATOR", yytext()); }
-    "-="            { return createToken("OPERATOR", yytext()); }
-    "*="            { return createToken("OPERATOR", yytext()); }
-    "/="            { return createToken("OPERATOR", yytext()); }
-    "%="            { return createToken("OPERATOR", yytext()); }
-    "&="            { return createToken("OPERATOR", yytext()); }
-    "|="            { return createToken("OPERATOR", yytext()); }
-    "^="            { return createToken("OPERATOR", yytext()); }
-    "<<="           { return createToken("OPERATOR", yytext()); }
-    ">>="           { return createToken("OPERATOR", yytext()); }
-    "<="            { return createToken("COMPARISON", yytext()); }
-    ">="            { return createToken("COMPARISON", yytext()); }
-
-
 
     // Delimitadores
     "("             { return createToken("DELIMITER", yytext()); }
