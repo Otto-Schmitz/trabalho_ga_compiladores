@@ -4,7 +4,7 @@ public class LexerTest {
     public static void main(String[] args) {
         try {
             FileReader input;
-            input = new FileReader("src/TestLexer.java"); // caminho fixo
+            input = new FileReader("src/TestLexer.txt"); // caminho fixo
             JavaLexer lexer = new JavaLexer(input);
             
 
