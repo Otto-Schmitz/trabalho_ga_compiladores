@@ -15,11 +15,15 @@
     }
 %}
 
-// Definições de padrões
+// Macros
 IDENTIFIER = [a-zA-Z_][a-zA-Z0-9_]*
-NUMBER = [0-9]+
+NUMBER = [0-9]+(\.[0-9]+)?
 WHITESPACE = [ \t\r\n]+
 
+OPERATOR = (\+|\-|\*|/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|=|\^=|<<=|>>=)
+COMPARISON = (==|!=|<=|>=|<|>)
+ASSIGNMENT = "="
+DELIMITER = [(){}[\];,]
 
 %%
 
@@ -35,50 +39,13 @@ WHITESPACE = [ \t\r\n]+
     "String"        { return createToken("TYPE", yytext()); }
     "char"          { return createToken("TYPE", yytext()); }
 
-    // Operadores
-    "+"             { return createToken("OPERATOR", yytext()); }
-    "-"             { return createToken("OPERATOR", yytext()); }
-    "*"             { return createToken("OPERATOR", yytext()); }
-    "/"             { return createToken("OPERATOR", yytext()); }
-    "="             { return createToken("ASSIGNMENT", yytext()); }
-    "=="            { return createToken("COMPARISON", yytext()); }
-    "!="            { return createToken("COMPARISON", yytext()); }
-    "!"             { return createToken("COMPARISON", yytext()); }
-    "%"             { return createToken("COMPARISON", yytext()); }
-    "<"             { return createToken("COMPARISON", yytext()); }
-    ">"             { return createToken("COMPARISON", yytext()); }
-    "%"             { return createToken("OPERATOR", yytext()); }
-    "&"             { return createToken("OPERATOR", yytext()); }
-    "|"             { return createToken("OPERATOR", yytext()); }
-    "^"             { return createToken("OPERATOR", yytext()); }
-    "~"             { return createToken("OPERATOR", yytext()); }
-    "<<"            { return createToken("OPERATOR", yytext()); }
-    ">>"            { return createToken("OPERATOR", yytext()); }
-    "++"            { return createToken("OPERATOR", yytext()); }
-    "--"            { return createToken("OPERATOR", yytext()); }
-    "+="            { return createToken("OPERATOR", yytext()); }
-    "-="            { return createToken("OPERATOR", yytext()); }
-    "*="            { return createToken("OPERATOR", yytext()); }
-    "/="            { return createToken("OPERATOR", yytext()); }
-    "%="            { return createToken("OPERATOR", yytext()); }
-    "&="            { return createToken("OPERATOR", yytext()); }
-    "|="            { return createToken("OPERATOR", yytext()); }
-    "^="            { return createToken("OPERATOR", yytext()); }
-    "<<="           { return createToken("OPERATOR", yytext()); }
-    ">>="           { return createToken("OPERATOR", yytext()); }
-    "<="            { return createToken("COMPARISON", yytext()); }
-    ">="            { return createToken("COMPARISON", yytext()); }
-
-
+    // Operadores e comparação
+    {OPERATOR}      { return createToken("OPERATOR", yytext()); }
+    {COMPARISON}    { return createToken("COMPARISON", yytext()); }
+    {ASSIGNMENT}    { return createToken("ASSIGNMENT", yytext()); }
 
     // Delimitadores
-    "("             { return createToken("DELIMITER", yytext()); }
-    ")"             { return createToken("DELIMITER", yytext()); }
-    "{"             { return createToken("DELIMITER", yytext()); }
-    "}"             { return createToken("DELIMITER", yytext()); }
-    ";"             { return createToken("DELIMITER", yytext()); }
-    ","             { return createToken("DELIMITER", yytext()); }
-
+    {DELIMITER}     { return createToken("DELIMITER", yytext()); }
 
     // Tokens
     {IDENTIFIER}    { return createToken("IDENTIFIER", yytext()); }
@@ -87,21 +54,23 @@ WHITESPACE = [ \t\r\n]+
     // Ignorar espaços em branco
     {WHITESPACE}    { /* ignorar */ }
 
-    \"              {string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1;}
-    \'([^\\'\n]|\\[nrt\"\\])\'  {return createToken("CHAR", yytext().substring(1, yytext().length()-1));}
+    // Strings
+    \"              { string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1; }
+
+    // Char literal (corrigido para aceitar '\\')
+    \'([^\\'\n]|\\[nrt\"\'\\])\'  { return createToken("CHAR", yytext().substring(1, yytext().length()-1)); }
 }
 
 <STR>{
-    \" { yybegin(YYINITIAL); return createToken("STRING", string.toString()); }
-    [^\n\r\"\\]+ { string.append( yytext() ); }
-    \\t { string.append('\t'); }
-    \\n { string.append('\n'); }
-    \\r { string.append('\r'); }
-    \\\" { string.append('\"'); }
-    \\ { string.append('\\'); }
-    \r\n|\n|\r { yybegin(YYINITIAL); return createToken("ERROR","Unterminated string starting at " + strStartLine + ":" + strStartCol); }
-    \\[^\"nrt\\u] {yybegin(YYINITIAL); return createToken("ERROR", "Invalid escape in string: " + yytext() + " at " + strStartLine + ":" + strStartCol);
-  }
+    \"              { yybegin(YYINITIAL); return createToken("STRING", string.toString()); }
+    [^\n\r\"\\]+    { string.append( yytext() ); }
+    \\t             { string.append('\t'); }
+    \\n             { string.append('\n'); }
+    \\r             { string.append('\r'); }
+    \\\"            { string.append('\"'); }
+    \\\\            { string.append('\\'); }
+    \r\n|\n|\r      { yybegin(YYINITIAL); return createToken("ERROR","Unterminated string starting at " + strStartLine + ":" + strStartCol); }
+    \\[^\"nrt\\u]   { yybegin(YYINITIAL); return createToken("ERROR", "Invalid escape in string: " + yytext() + " at " + strStartLine + ":" + strStartCol); }
 }
 
 // Caracteres não reconhecidos
