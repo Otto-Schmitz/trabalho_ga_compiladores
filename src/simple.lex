@@ -20,10 +20,10 @@ IDENTIFIER = [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER = [0-9]+(\.[0-9]+)?
 WHITESPACE = [ \t\r\n]+
 
-OPERATOR = (\+|\-|\*|/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|=|\^=|<<=|>>=)
-COMPARISON = (==|!=|<=|>=|<|>)
-ASSIGNMENT = "="
-DELIMITER = [(){}[\];,]
+OPERATOR = [\+|\-|\*|\/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|=|\^=|<<=|>>=]
+COMPARISON = [==|!=|<=|>=|<|>]
+ASSIGNMENT = [=]
+DELIMITER = [(){}\\;,]
 
 %%
 
@@ -34,6 +34,9 @@ DELIMITER = [(){}[\];,]
     "while"         { return createToken("KEYWORD", yytext()); }
     "for"           { return createToken("KEYWORD", yytext()); }
     "return"        { return createToken("KEYWORD", yytext()); }
+    "public"        { return createToken("KEYWORD", yytext()); }
+    "class"         { return createToken("KEYWORD", yytext()); }
+    "void"          { return createToken("KEYWORD", yytext()); }
     "int"           { return createToken("TYPE", yytext()); }
     "float"         { return createToken("TYPE", yytext()); }
     "String"        { return createToken("TYPE", yytext()); }
