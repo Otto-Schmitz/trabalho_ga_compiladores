@@ -19,7 +19,7 @@ public class TestLexer {
     }
 
 
-    String s = "Hello, World!";
+    String s = "Hello, World!;
     String nome = "João";
     float y = 1.0f;
     double z = 3.14159;

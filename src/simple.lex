@@ -8,6 +8,7 @@
 
 %{
     StringBuffer string = new StringBuffer();
+    private int strStartLine, strStartCol;
 
     private Token createToken(String tipo, String valor) {
         return new Token(tipo, valor, yyline + 1, yycolumn + 1);
@@ -86,9 +87,8 @@ WHITESPACE = [ \t\r\n]+
     // Ignorar espaços em branco
     {WHITESPACE}    { /* ignorar */ }
 
-    \"              {string.setLength(0); yybegin(STR);}
+    \"              {string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1;}
     \'([^\\'\n]|\\[nrt\"\\])\'  {return createToken("CHAR", yytext().substring(1, yytext().length()-1));}
-
 }
 
 <STR>{
@@ -99,11 +99,19 @@ WHITESPACE = [ \t\r\n]+
     \\r { string.append('\r'); }
     \\\" { string.append('\"'); }
     \\ { string.append('\\'); }
+    \r\n|\n|\r { yybegin(YYINITIAL); return createToken("ERROR","Unterminated string starting at " + strStartLine + ":" + strStartCol); }
+    \\[^\"nrt\\u] {yybegin(YYINITIAL); return createToken("ERROR", "Invalid escape in string: " + yytext() + " at " + strStartLine + ":" + strStartCol);
+  }
 }
-
-
 
 // Caracteres não reconhecidos
 .               { return createToken("ERROR", yytext()); }
 
-<<EOF>>         { return null; }
+<<EOF>> {
+  if (yystate() == STR) {
+    yybegin(YYINITIAL);
+    return createToken("ERROR",
+      "Unterminated string at EOF (started at " + strStartLine + ":" + strStartCol + ")");
+  }
+  return null;
+}
