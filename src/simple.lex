@@ -5,6 +5,7 @@
 %line
 %column
 %state STR
+%state CHAR
 
 %{
     StringBuffer string = new StringBuffer();
@@ -19,6 +20,7 @@ IDENTIFIER = [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER = [0-9]+
 WHITESPACE = [ \t\r\n]+
 
+
 %%
 
 <YYINITIAL>{
@@ -27,10 +29,11 @@ WHITESPACE = [ \t\r\n]+
     "else"          { return createToken("KEYWORD", yytext()); }
     "while"         { return createToken("KEYWORD", yytext()); }
     "for"           { return createToken("KEYWORD", yytext()); }
+    "return"        { return createToken("KEYWORD", yytext()); }
     "int"           { return createToken("TYPE", yytext()); }
     "float"         { return createToken("TYPE", yytext()); }
     "String"        { return createToken("TYPE", yytext()); }
-    "return"        { return createToken("KEYWORD", yytext()); }
+    "char"          { return createToken("TYPE", yytext()); }
 
     // Operadores
     "+"             { return createToken("OPERATOR", yytext()); }
@@ -60,6 +63,8 @@ WHITESPACE = [ \t\r\n]+
     {WHITESPACE}    { /* ignorar */ }
 
     \"              {string.setLength(0); yybegin(STR);}
+    \'([^\\'\n]|\\[nrt\"\\])\'  {return createToken("CHAR", yytext().substring(1, yytext().length()-1));}
+
 }
 
 <STR>{
@@ -71,6 +76,8 @@ WHITESPACE = [ \t\r\n]+
     \\\" { string.append('\"'); }
     \\ { string.append('\\'); }
 }
+
+
 
 // Caracteres não reconhecidos
 .               { return createToken("ERROR", yytext()); }

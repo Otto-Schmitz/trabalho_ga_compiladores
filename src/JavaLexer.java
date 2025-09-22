@@ -16,6 +16,7 @@ class JavaLexer {
   // Lexical states.
   public static final int YYINITIAL = 0;
   public static final int STR = 2;
+  public static final int CHAR = 4;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -24,7 +25,7 @@ class JavaLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0,  0,  1, 1
+     0,  0,  1,  1,  2, 2
   };
 
   /**
@@ -61,14 +62,14 @@ class JavaLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\1\1\1\2\2\3\1\2\22\0\1\1\1\4"+
-    "\1\5\5\0\2\6\2\7\1\6\1\7\1\0\1\7"+
-    "\12\10\1\0\1\6\1\11\1\12\1\11\2\0\22\13"+
-    "\1\14\7\13\1\0\1\15\2\0\1\13\1\0\1\16"+
-    "\3\13\1\17\1\20\1\21\1\22\1\23\2\13\1\24"+
-    "\1\13\1\25\1\26\2\13\1\27\1\30\1\31\1\32"+
-    "\1\13\1\33\3\13\1\6\1\0\1\6\7\0\1\3"+
-    "\u01a2\0\2\3\326\0\u0100\3";
+    "\11\0\1\1\1\2\2\3\1\4\22\0\1\1\1\5"+
+    "\1\6\4\0\1\7\2\10\2\11\1\10\1\11\1\0"+
+    "\1\11\12\12\1\0\1\10\1\13\1\14\1\13\2\0"+
+    "\22\15\1\16\7\15\1\0\1\17\2\0\1\15\1\0"+
+    "\1\20\1\15\1\21\1\15\1\22\1\23\1\24\1\25"+
+    "\1\26\2\15\1\27\1\15\1\30\1\31\2\15\1\32"+
+    "\1\33\1\34\1\35\1\15\1\36\3\15\1\10\1\0"+
+    "\1\10\7\0\1\3\u01a2\0\2\3\326\0\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -95,12 +96,13 @@ class JavaLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\1\1\1\2\1\1\1\3\1\4\1\5\1\6"+
-    "\1\7\1\10\7\11\1\12\1\13\1\14\4\11\1\15"+
-    "\3\11\1\16\1\17\1\20\1\21\3\11\1\22\6\11";
+    "\3\0\1\1\1\2\1\1\1\3\1\1\1\4\1\5"+
+    "\1\6\1\7\1\10\10\11\1\12\1\13\1\14\2\0"+
+    "\5\11\1\15\3\11\1\16\1\17\1\20\1\21\1\22"+
+    "\4\11\1\23\6\11";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[43];
+    int [] result = new int[51];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -125,15 +127,16 @@ class JavaLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\34\0\70\0\124\0\160\0\70\0\70\0\70"+
-    "\0\214\0\70\0\160\0\250\0\304\0\340\0\374\0\u0118"+
-    "\0\u0134\0\u0150\0\u016c\0\70\0\u0188\0\u01a4\0\u01c0\0\u01dc"+
-    "\0\u01f8\0\250\0\u0214\0\u0230\0\u024c\0\70\0\70\0\70"+
-    "\0\70\0\u0268\0\u0284\0\u02a0\0\250\0\u02bc\0\u02d8\0\u02f4"+
-    "\0\u0310\0\u032c\0\u0348";
+    "\0\0\0\37\0\76\0\135\0\174\0\233\0\135\0\272"+
+    "\0\135\0\135\0\331\0\135\0\233\0\370\0\u0117\0\u0136"+
+    "\0\u0155\0\u0174\0\u0193\0\u01b2\0\u01d1\0\u01f0\0\135\0\u020f"+
+    "\0\u022e\0\u024d\0\u026c\0\u028b\0\u02aa\0\u02c9\0\u02e8\0\370"+
+    "\0\u0307\0\u0326\0\u0345\0\135\0\135\0\135\0\135\0\135"+
+    "\0\u0364\0\u0383\0\u03a2\0\u03c1\0\370\0\u03e0\0\u03ff\0\u041e"+
+    "\0\u043d\0\u045c\0\u047b";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[43];
+    int [] result = new int[51];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -156,39 +159,46 @@ class JavaLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\3\2\4\1\0\1\5\1\6\1\7\1\10\1\11"+
-    "\1\12\1\13\1\14\1\15\1\3\1\14\1\16\1\17"+
-    "\2\14\1\20\3\14\1\21\3\14\1\22\2\23\1\0"+
-    "\2\23\1\24\7\23\1\25\16\23\35\0\2\4\43\0"+
-    "\1\12\31\0\1\11\33\0\1\14\2\0\2\14\1\0"+
-    "\16\14\10\0\1\14\2\0\2\14\1\0\13\14\1\26"+
-    "\2\14\10\0\1\14\2\0\2\14\1\0\6\14\1\27"+
-    "\7\14\10\0\1\14\2\0\2\14\1\0\6\14\1\30"+
-    "\1\14\1\31\5\14\10\0\1\14\2\0\2\14\1\0"+
-    "\2\14\1\32\4\14\1\33\6\14\10\0\1\14\2\0"+
-    "\2\14\1\0\1\14\1\34\14\14\10\0\1\14\2\0"+
-    "\2\14\1\0\4\14\1\35\11\14\2\23\1\0\2\23"+
-    "\1\0\7\23\1\0\16\23\5\0\1\36\17\0\1\37"+
-    "\1\0\1\40\1\0\1\41\12\0\1\14\2\0\2\14"+
-    "\1\0\11\14\1\42\4\14\10\0\1\14\2\0\2\14"+
-    "\1\0\12\14\1\43\3\14\10\0\1\14\2\0\2\14"+
-    "\1\0\10\14\1\44\5\14\10\0\1\14\2\0\2\14"+
-    "\1\0\11\14\1\32\4\14\10\0\1\14\2\0\2\14"+
-    "\1\0\13\14\1\45\2\14\10\0\1\14\2\0\2\14"+
-    "\1\0\13\14\1\46\2\14\10\0\1\14\2\0\2\14"+
-    "\1\0\5\14\1\47\10\14\10\0\1\14\2\0\2\14"+
-    "\1\0\5\14\1\50\10\14\10\0\1\14\2\0\2\14"+
-    "\1\0\1\14\1\32\14\14\10\0\1\14\2\0\2\14"+
-    "\1\0\1\33\15\14\10\0\1\14\2\0\2\14\1\0"+
-    "\14\14\1\51\1\14\10\0\1\14\2\0\2\14\1\0"+
-    "\6\14\1\43\7\14\10\0\1\14\2\0\2\14\1\0"+
-    "\7\14\1\52\6\14\10\0\1\14\2\0\2\14\1\0"+
-    "\11\14\1\53\4\14\10\0\1\14\2\0\2\14\1\0"+
-    "\3\14\1\45\12\14\10\0\1\14\2\0\2\14\1\0"+
-    "\7\14\1\32\6\14";
+    "\1\4\2\5\1\0\1\5\1\6\1\7\1\10\1\11"+
+    "\1\12\1\13\1\14\1\15\1\16\1\17\1\4\1\16"+
+    "\1\20\1\21\1\22\2\16\1\23\3\16\1\24\3\16"+
+    "\1\25\2\26\1\0\1\26\1\0\1\26\1\27\10\26"+
+    "\1\30\17\26\2\4\3\0\32\4\40\0\2\5\1\0"+
+    "\1\5\46\0\1\14\22\0\2\31\1\0\4\31\1\0"+
+    "\7\31\1\32\17\31\12\0\1\13\36\0\1\16\2\0"+
+    "\2\16\1\0\17\16\12\0\1\16\2\0\2\16\1\0"+
+    "\14\16\1\33\2\16\12\0\1\16\2\0\2\16\1\0"+
+    "\5\16\1\34\11\16\12\0\1\16\2\0\2\16\1\0"+
+    "\7\16\1\35\7\16\12\0\1\16\2\0\2\16\1\0"+
+    "\7\16\1\36\1\16\1\37\5\16\12\0\1\16\2\0"+
+    "\2\16\1\0\3\16\1\40\4\16\1\41\6\16\12\0"+
+    "\1\16\2\0\2\16\1\0\2\16\1\42\14\16\12\0"+
+    "\1\16\2\0\2\16\1\0\5\16\1\43\11\16\2\26"+
+    "\1\0\1\26\1\0\1\26\1\0\10\26\1\0\17\26"+
+    "\6\0\1\44\21\0\1\45\1\0\1\46\1\0\1\47"+
+    "\11\0\1\50\35\0\1\31\10\0\1\31\10\0\1\31"+
+    "\1\0\1\31\1\0\1\31\14\0\1\16\2\0\2\16"+
+    "\1\0\12\16\1\51\4\16\12\0\1\16\2\0\2\16"+
+    "\1\0\1\52\16\16\12\0\1\16\2\0\2\16\1\0"+
+    "\13\16\1\53\3\16\12\0\1\16\2\0\2\16\1\0"+
+    "\11\16\1\54\5\16\12\0\1\16\2\0\2\16\1\0"+
+    "\12\16\1\40\4\16\12\0\1\16\2\0\2\16\1\0"+
+    "\14\16\1\55\2\16\12\0\1\16\2\0\2\16\1\0"+
+    "\14\16\1\56\2\16\12\0\1\16\2\0\2\16\1\0"+
+    "\6\16\1\57\10\16\12\0\1\16\2\0\2\16\1\0"+
+    "\6\16\1\60\10\16\12\0\1\16\2\0\2\16\1\0"+
+    "\12\16\1\55\4\16\12\0\1\16\2\0\2\16\1\0"+
+    "\2\16\1\40\14\16\12\0\1\16\2\0\2\16\1\0"+
+    "\1\41\16\16\12\0\1\16\2\0\2\16\1\0\15\16"+
+    "\1\61\1\16\12\0\1\16\2\0\2\16\1\0\7\16"+
+    "\1\53\7\16\12\0\1\16\2\0\2\16\1\0\10\16"+
+    "\1\62\6\16\12\0\1\16\2\0\2\16\1\0\12\16"+
+    "\1\63\4\16\12\0\1\16\2\0\2\16\1\0\4\16"+
+    "\1\55\12\16\12\0\1\16\2\0\2\16\1\0\10\16"+
+    "\1\40\6\16";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[868];
+    int [] result = new int[1178];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -231,11 +241,11 @@ class JavaLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\1\11\2\1\3\11\1\1\1\11\11\1\1\11"+
-    "\11\1\4\11\12\1";
+    "\3\0\1\11\2\1\1\11\1\1\2\11\1\1\1\11"+
+    "\12\1\1\11\1\1\2\0\11\1\5\11\13\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[43];
+    int [] result = new int[51];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -718,92 +728,97 @@ class JavaLexer {
             { return createToken("ERROR", yytext());
             }
             // fall through
-          case 19: break;
+          case 20: break;
           case 2:
             { /* ignorar */
             }
             // fall through
-          case 20: break;
+          case 21: break;
           case 3:
             { string.setLength(0); yybegin(STR);
             }
             // fall through
-          case 21: break;
+          case 22: break;
           case 4:
             { return createToken("DELIMITER", yytext());
             }
             // fall through
-          case 22: break;
+          case 23: break;
           case 5:
             { return createToken("OPERATOR", yytext());
             }
             // fall through
-          case 23: break;
+          case 24: break;
           case 6:
             { return createToken("NUMBER", yytext());
             }
             // fall through
-          case 24: break;
+          case 25: break;
           case 7:
             { return createToken("COMPARISON", yytext());
             }
             // fall through
-          case 25: break;
+          case 26: break;
           case 8:
             { return createToken("ASSIGNMENT", yytext());
             }
             // fall through
-          case 26: break;
+          case 27: break;
           case 9:
             { return createToken("IDENTIFIER", yytext());
             }
             // fall through
-          case 27: break;
+          case 28: break;
           case 10:
             { string.append( yytext() );
             }
             // fall through
-          case 28: break;
+          case 29: break;
           case 11:
             { yybegin(YYINITIAL); return createToken("STRING", string.toString());
             }
             // fall through
-          case 29: break;
+          case 30: break;
           case 12:
             { string.append('\\');
             }
             // fall through
-          case 30: break;
+          case 31: break;
           case 13:
             { return createToken("KEYWORD", yytext());
             }
             // fall through
-          case 31: break;
+          case 32: break;
           case 14:
             { string.append('\"');
             }
             // fall through
-          case 32: break;
+          case 33: break;
           case 15:
             { string.append('\n');
             }
             // fall through
-          case 33: break;
+          case 34: break;
           case 16:
             { string.append('\r');
             }
             // fall through
-          case 34: break;
+          case 35: break;
           case 17:
             { string.append('\t');
             }
             // fall through
-          case 35: break;
+          case 36: break;
           case 18:
+            { return createToken("CHAR", yytext().substring(1, yytext().length()-1));
+            }
+            // fall through
+          case 37: break;
+          case 19:
             { return createToken("TYPE", yytext());
             }
             // fall through
-          case 36: break;
+          case 38: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
