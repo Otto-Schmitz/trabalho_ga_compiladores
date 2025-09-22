@@ -5,7 +5,6 @@
 %line
 %column
 %state STR
-%state CHAR
 
 %{
     StringBuffer string = new StringBuffer();
@@ -43,8 +42,33 @@ WHITESPACE = [ \t\r\n]+
     "="             { return createToken("ASSIGNMENT", yytext()); }
     "=="            { return createToken("COMPARISON", yytext()); }
     "!="            { return createToken("COMPARISON", yytext()); }
+    "!"             { return createToken("COMPARISON", yytext()); }
+    "%"             { return createToken("COMPARISON", yytext()); }
     "<"             { return createToken("COMPARISON", yytext()); }
     ">"             { return createToken("COMPARISON", yytext()); }
+    "%"             { return createToken("OPERATOR", yytext()); }
+    "&"             { return createToken("OPERATOR", yytext()); }
+    "|"             { return createToken("OPERATOR", yytext()); }
+    "^"             { return createToken("OPERATOR", yytext()); }
+    "~"             { return createToken("OPERATOR", yytext()); }
+    "<<"            { return createToken("OPERATOR", yytext()); }
+    ">>"            { return createToken("OPERATOR", yytext()); }
+    "++"            { return createToken("OPERATOR", yytext()); }
+    "--"            { return createToken("OPERATOR", yytext()); }
+    "+="            { return createToken("OPERATOR", yytext()); }
+    "-="            { return createToken("OPERATOR", yytext()); }
+    "*="            { return createToken("OPERATOR", yytext()); }
+    "/="            { return createToken("OPERATOR", yytext()); }
+    "%="            { return createToken("OPERATOR", yytext()); }
+    "&="            { return createToken("OPERATOR", yytext()); }
+    "|="            { return createToken("OPERATOR", yytext()); }
+    "^="            { return createToken("OPERATOR", yytext()); }
+    "<<="           { return createToken("OPERATOR", yytext()); }
+    ">>="           { return createToken("OPERATOR", yytext()); }
+    "<="            { return createToken("COMPARISON", yytext()); }
+    ">="            { return createToken("COMPARISON", yytext()); }
+
+
 
     // Delimitadores
     "("             { return createToken("DELIMITER", yytext()); }
