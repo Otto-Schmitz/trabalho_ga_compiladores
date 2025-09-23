@@ -25,6 +25,7 @@ OPERATOR = [\+|\-|\*|\/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|\^=|<
 COMPARISON = [==|!=|<=|>=|<|>]
 DELIMITER = [(){}\\;,]
 CHAR = \'([^\\'\n]|\\[nrt\"\'\\])\'
+STRINGDELIMITER = \"
 
 %%
 
@@ -59,7 +60,7 @@ CHAR = \'([^\\'\n]|\\[nrt\"\'\\])\'
     {WHITESPACE}    { /* ignorar */ }
 
     // Strings
-    \"              { string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1; }
+    {STRINGDELIMITER}             { string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1; }
 
     // Char literal (corrigido para aceitar '\\')
     {CHAR}  { return createToken("CHAR", yytext().substring(1, yytext().length()-1)); }
