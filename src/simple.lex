@@ -20,10 +20,11 @@ IDENTIFIER = [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER = [0-9]+(\.[0-9]+)?
 WHITESPACE = [ \t\r\n]+
 
-OPERATOR = [\+|\-|\*|\/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|=|\^=|<<=|>>=]
-COMPARISON = [==|!=|<=|>=|<|>]
 ASSIGNMENT = [=]
+OPERATOR = [\+|\-|\*|\/|%|\+\+|\-\-|\+=|\-=|\*=|/=|%=|&|\||\^|~|<<|>>|&=|\|\^=|<<=|>>=]
+COMPARISON = [==|!=|<=|>=|<|>]
 DELIMITER = [(){}\\;,]
+CHAR = \'([^\\'\n]|\\[nrt\"\'\\])\'
 
 %%
 
@@ -43,9 +44,9 @@ DELIMITER = [(){}\\;,]
     "char"          { return createToken("TYPE", yytext()); }
 
     // Operadores e comparação
+    {ASSIGNMENT}    { return createToken("ASSIGNMENT", yytext()); }
     {OPERATOR}      { return createToken("OPERATOR", yytext()); }
     {COMPARISON}    { return createToken("COMPARISON", yytext()); }
-    {ASSIGNMENT}    { return createToken("ASSIGNMENT", yytext()); }
 
     // Delimitadores
     {DELIMITER}     { return createToken("DELIMITER", yytext()); }
@@ -61,7 +62,7 @@ DELIMITER = [(){}\\;,]
     \"              { string.setLength(0); yybegin(STR); strStartLine = yyline + 1;  strStartCol  = yycolumn + 1; }
 
     // Char literal (corrigido para aceitar '\\')
-    \'([^\\'\n]|\\[nrt\"\'\\])\'  { return createToken("CHAR", yytext().substring(1, yytext().length()-1)); }
+    {CHAR}  { return createToken("CHAR", yytext().substring(1, yytext().length()-1)); }
 }
 
 <STR>{

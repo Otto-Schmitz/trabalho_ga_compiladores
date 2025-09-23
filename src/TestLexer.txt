@@ -2,6 +2,8 @@ public class TestLexer {
 
   int x;
 
+  // comentario
+
   public void verificar() {
     if (x == 10) {
       x = x + 1;
@@ -19,11 +21,12 @@ public class TestLexer {
     }
 
 
-    String s = "Hello, World!;
+    String s = "Hello, World!";
     String nome = "João";
     float y = 1.0f;
     double z = 3.14159;
     int idade = 25;
     char a = 'a';
+    char barraN = '\n';
   }
 }
